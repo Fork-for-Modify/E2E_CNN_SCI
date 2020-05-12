@@ -1,0 +1,46 @@
+# files
+*.txt
+*.fig
+*.asv
+*.vscode
+*.mat
+*.zip
+*.pyc
+config_*.yaml
+checkpoint
+info.log
+models-*
+
+# /config/patterns_generator/*.mat
+# /result/*
+# result/savedmat/*
+# dataset/*
+
+# dirs
+_trash/
+_release/
+__pycache__/
+/tmp/
+
+
+
+
+
+# keep
+!.gitkeep
+
+
+# E2E-CNN
+!mask*.mat
+
+!models-0.0377-22256.data-00000-of-00001
+!models-0.0377-22256.index
+!config_Cr10_model.yaml
+
+!models-0.0362-28676.data-00000-of-00001
+!models-0.0362-28676.index
+!config_Cr20_model.yaml
+
+!models-0.0428-16092.data-00000-of-00001
+!models-0.0428-16092.index
+!config_Cr30_model.yaml
