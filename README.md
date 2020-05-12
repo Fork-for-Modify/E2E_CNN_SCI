@@ -25,18 +25,18 @@ This repository contains the  codes modified from https://github.com/mq0829/DL-C
 
 ## Training
 
-You can train the model by adding your training data to 'data_simu/training_truth', and most of training parameters can be adjusted in 'Model/Config.yaml'.
+You can train the model by adding your training data to 'data_simu/training_truth/', and most of training parameters can be adjusted in 'Model/Config.yaml'.
 
-## Test
+## Testing
 
 1. use ’orig‘ as the test input data：
-   - Put the data in 'data_simu\testing_truth'
-   - Open and modify 'E2E_CNN_simu\test_orig.py' according to the instructions in the beginning of the code and then run it.
-   - The results will be saved as 'E2E_CNN_simu\Result\Validation-Result\Test_orig_result_i.mat'
+   - Put the ’orig‘  in 'data_simu/testing_truth/', and put the 'mask' in 'data_simu/'
+   - Open and modify 'E2E_CNN_simu/test_orig.py' according to the instructions in the beginning of the code and then run it.
+   - The results will be saved as 'E2E_CNN_simu/Result/Validation-Result/Test_orig_result_i.mat'
 2. use ’meas‘ as the test input data：
-   - Put the data in 'data_meas\meas'
-   - Open and modify 'E2E_CNN_simu\test_meas.py' according to the instructions in the beginning of the code and then run it.
-   - The results will be saved as 'E2E_CNN_simu\Result\Validation-Result\Test_meas_result_i.mat'
+   - Put the data in 'data_meas/meas/', and put the 'mask' in 'data_mask/mask/'
+   - Open and modify 'E2E_CNN_simu/test_meas.py' according to the instructions in the beginning of the code and then run it.
+   - The results will be saved as 'E2E_CNN_simu/Result/Validation-Result/Test_meas_result_i.mat'
 
 
 
