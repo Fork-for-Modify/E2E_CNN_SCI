@@ -2,7 +2,7 @@
 # Test steps
 # [0] Specify specify 'pre_model_name' in line 26 choosing from 'pre_model_dir'
 # [1] Specify 'test_data_dir' in line 37 and Specify 'mask_name' in line39, choosing from 'data_simu/'
-# [2] Specify 'batch_size' in line 43
+# [2] Specify 'compressive_ratio' and 'batch_size' in line 36,37; 
 # [3] Run the code
 # [4] Results will be stored in 'Result/Validation-Result'
 
@@ -25,13 +25,16 @@ def main():
           
     ### pre-trainded model
     # pre_model_name [modify]
-    pre_model_name = 'Decoder-T0427184230-D0.10L0.010-RMSE/models-0.0744-256404'
-
+    # pre_model_name = 'Decoder-T0427184230-D0.10L0.010-RMSE/models-0.0744-256404'
+    pre_model_name = 'Decoder-T0516005658-D0.10L0.010-RMSE/models-0.2311-57937'
+    
     pre_model_dir = 'Result\\Model-Config'
     model_filename = os.path.join(os.path.abspath('.'), pre_model_dir, pre_model_name)
     model_config = {'model_filename': model_filename,
                     'result_data': 'Validation-Result',
-                    'result_dir': 'Result'}
+                    'result_dir': 'Result',
+                    'compressive_ratio':10,
+                    'batch_size': 1} # [modify]
     
     ### test set
     # test_data_dir [modify]
@@ -39,10 +42,9 @@ def main():
 
     # mask_name [modify]
     # mask_name = 'mask_original' 
-    mask_name = 'mask_256'
-    
-    # batch size [modify]
-    model_config['batch_size'] = 1
+    # mask_name = 'mask_256'
+    mask_name = 'combine_mask_256_10f'
+
 
     ## test_data
     data_name = []

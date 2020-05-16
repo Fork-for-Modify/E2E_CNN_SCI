@@ -2,7 +2,7 @@
 # Test steps
 # [0] Specify specify 'pre_model_name' in line 26 choosing from 'pre_model_dir'
 # [1] Specify 'test_data_dir' in line 37 and Specify 'mask_name' in line40, choosing from 'data_meas/mask'
-# [2] Specify 'batch_size' in line 44
+# [2] Specify 'compressive_ratio' and 'batch_size' in line 35,36; 
 # [3] Run the code
 # [4] Results will be stored in 'Result/Validation-Result'
 
@@ -31,8 +31,10 @@ def main():
     model_filename = os.path.join(os.path.abspath('.'), pre_model_dir, pre_model_name)
     model_config = {'model_filename': model_filename,
                     'result_data': 'Validation-Result',
-                    'result_dir': 'Result'}
-    
+                    'result_dir': 'Result',
+                    'compressive_ratio':10,
+                    'batch_size': 1} # [modify]
+        
     ### test set
     # test_data_dir [modify]
     test_data_dir = os.path.join(os.path.abspath('..'), 'data_meas\\meas\\')
@@ -40,9 +42,7 @@ def main():
     # mask_name [modify]
     # mask_name = 'mask_original' 
     mask_name = 'mask_256'
-    
-    # batch size [modify]
-    model_config['batch_size'] = 1
+
 
     ## test_data
     data_name = []

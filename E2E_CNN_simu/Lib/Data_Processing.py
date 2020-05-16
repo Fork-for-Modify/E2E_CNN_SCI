@@ -37,8 +37,11 @@ def Data_Division(dataset_name,nF, is_testing=False, experiment=True):
     #sample_num_valid = len(label_valid)
     #sample_num_test = len(label_testing)
     
-    mask_file = sio.loadmat(mask_name+'.mat')
-    mask = mask_file['mask']               
+    mask_file = sio.loadmat(mask_name+'.mat') # for '-v7' .mat file (MATLAB)
+    mask = mask_file['mask']
+    # with h5py.File(mask_name+'.mat', 'r') as mask_file: # for '-v7.3' .mat file (MATLAB), test it before use-zzh
+    #     mask = np.array(mask_file['mask']) 
+    #     mask.transpose((1, 2, 0))         
     # all zero place change into 1
     p = np.argwhere(np.sum(mask,2)==0)
     np.random.seed(1)

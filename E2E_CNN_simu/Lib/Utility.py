@@ -63,7 +63,7 @@ def calculate_metrics(decoded, ground, label):
     return psnr, ssim
 
 def loss_SSIM(decoded,ground,label=None):
-    print(decoded.get_shape().as_list(),ground.get_shape().as_list())
+    # print(decoded.get_shape().as_list(),ground.get_shape().as_list())
     #return tf.constant(1.0)-tf.image.ssim_multiscale(decoded,ground,1.0)
     return tf.abs(tf.constant(1.0)-MultiScaleSSIM(decoded,ground))
     
