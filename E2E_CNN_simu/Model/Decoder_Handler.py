@@ -40,6 +40,7 @@ class Decoder_Handler(Basement_Handler):
         self.meas_sample = tf.placeholder(tf.float32, shape=shape_meas, name='input_meas')
         self.sense_matrix = tf.placeholder(tf.float32, shape=shape_sense, name='input_mat')
         self.truth_seg = tf.placeholder(tf.float32, shape=shape_truth, name='output_truth')
+        print('Input data shape: ', shape_meas, '\n') #zzh
         
         # Initialization for the model training procedure.
         self.learning_rate = tf.get_variable('learning_rate', shape=(), initializer=tf.constant_initializer(self.lr_init),trainable=False)
@@ -172,15 +173,16 @@ class Decoder_Handler(Basement_Handler):
             
             # Information Logging for Model Training and Validation (Maybe for Curve Plotting)
             Tloss,Vloss = np.mean(Tresults["loss"]),np.mean(Vresults["loss"])
-            train_psnr = np.mean(np.asarray(Tresults["psnr"]))
-            valid_psnr_sample = np.reshape(np.asarray(Vresults["psnr"]),self.valid_size*self.batch_size)
-            psnr_aerial = np.mean(valid_psnr_sample[0:4])
-            psnr_crash = np.mean(valid_psnr_sample[4:8])
-            psnr_drop = np.mean(valid_psnr_sample[8])
-            psnr_kobe = np.mean(valid_psnr_sample[9:13])
-            psnr_runner = np.mean(valid_psnr_sample[13])
-            psnr_traffic = np.mean(valid_psnr_sample[14:20])
-            valid_psnr = (psnr_aerial+psnr_crash+psnr_drop+psnr_kobe+psnr_runner+psnr_traffic)/6
+            train_psnr,valid_psnr = np.mean(Tresults["psnr"]),np.mean(Vresults["psnr"])
+            # train_psnr = np.mean(np.asarray(Tresults["psnr"]))
+            # valid_psnr_sample = np.reshape(np.asarray(Vresults["psnr"]),self.valid_size*self.batch_size)
+            # psnr_aerial = np.mean(valid_psnr_sample[0:4])
+            # psnr_crash = np.mean(valid_psnr_sample[4:8])
+            # psnr_drop = np.mean(valid_psnr_sample[8])
+            # psnr_kobe = np.mean(valid_psnr_sample[9:13])
+            # psnr_runner = np.mean(valid_psnr_sample[13])
+            # psnr_traffic = np.mean(valid_psnr_sample[14:20])
+            # valid_psnr = (psnr_aerial+psnr_crash+psnr_drop+psnr_kobe+psnr_runner+psnr_traffic)/6
             train_ssim,valid_ssim = np.mean(Tresults["ssim"]),np.mean(Vresults["ssim"])
             #train_mse, valid_mse  = np.mean(Tresults["mse"]), np.mean(Vresults["mse"])
             summary_format = ['loss/train_loss','loss/valid_loss','metric/train_psnr','metric/train_ssim',
@@ -192,6 +194,7 @@ class Decoder_Handler(Basement_Handler):
                 epoch_cnt, self.epochs, Tloss, Vloss, train_psnr, valid_psnr, np.mean(validation_time))
             self.logger.info(message)
             
+                        
             if valid_psnr >= max_val_psnr and valid_psnr>=28:
                 matcontent = {}
                 matcontent[u'truth'],matcontent[u'pred'] = list_truth, list_pred
@@ -205,8 +208,8 @@ class Decoder_Handler(Basement_Handler):
             hdf5storage.write(Loss, '.', self.log_dir+'/Loss.mat',
                                   store_python_metadata=False, matlab_compatible=True)
 
-            message = 'PSNR: aerial %s, crash %s, drop %s, kobe %s, runner %s, traffic %s' % (psnr_aerial, psnr_crash, psnr_drop, psnr_kobe, psnr_runner, psnr_traffic)
-            self.logger.info(message)
+            # message = 'PSNR: aerial %s, crash %s, drop %s, kobe %s, runner %s, traffic %s' % (psnr_aerial, psnr_crash, psnr_drop, psnr_kobe, psnr_runner, psnr_traffic)
+            # self.logger.info(message)
             
             if Vloss <= min_val_loss:
                 model_filename = self.save_model(self.saver, epoch_cnt, Vloss)

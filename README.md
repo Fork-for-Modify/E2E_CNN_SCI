@@ -10,12 +10,13 @@ This repository contains the  codes modified from https://github.com/mq0829/DL-C
 - E2E_CNN_simu: The models, codes and results
 - data_simu: The simulation data for training or testing. The input data is the scene ground truth ('orig') and mask ('mask'). And when training or testing, the coded measurement ('meas') will be generated automatically with 'orig' (rescale to 0-1 first) and 'mask'.
 - data_meas: The simulation data for testing. The input data is the coded measurement ('meas') and mask ('mask')
+- data_raw: Row dataset
 
 
 
 # Data format
 
-- 'orig': int, 0-255; '.mat' filetype; variable_name(key) = 'patch_save'
+- 'orig': int, 0-255, , H\*W\*Compressive_ratio; '.mat' filetype; variable_name(key) = 'patch_save'
 - 'mask': float 0-1|binary; '.mat' filetype; variable_name(key) = 'mask'
 - 'meas': float; '.mat' filetype; variable_name(key) = 'meas'
 
@@ -25,7 +26,10 @@ This repository contains the  codes modified from https://github.com/mq0829/DL-C
 
 ## Training
 
-You can train the model by adding your training data to 'data_simu/training_truth/', and most of training parameters can be adjusted in 'Model/Config.yaml'.
+1. put the ground truth (orig) datasets for training and validation in 'data_simu/training_truth' and 'data_simu/valid_truth', respectively.
+2. modify configurations in 'E2E_CNN_simu/Model/Config.yaml'
+3. run 'E2E_CNN_simu/train.py' to train the network
+4. the result will be saved in 'E2E_CNN_simu/Result/Model-Config/'
 
 ## Testing
 

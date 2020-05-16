@@ -25,7 +25,9 @@ def main():
     dataset_name = (data_name,mask_name)
     
     tf_config = tf.ConfigProto()
-    os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+    # os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+    os.environ["CUDA_VISIBLE_DEVICES"] = model_config['GPU']
+    
     # tf.device("GPU:1")
     tf_config = tf.ConfigProto()
     tf_config.gpu_options.allow_growth = True

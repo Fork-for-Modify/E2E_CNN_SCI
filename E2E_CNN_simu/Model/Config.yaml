@@ -25,10 +25,10 @@ height_occupy: 12
 # Model training Controler
 epochs: 500
 patience: 400
-learning_rate: 0.01
+learning_rate: 0.001
 lr_decay: 0.8
-lr_decay_epoch: 5
-lr_decay_interval: 5 
+lr_decay_epoch: 30
+lr_decay_interval: 30
 loss_func: RMSE
 upbound: 1
 # max_grad_norm: 5.0
