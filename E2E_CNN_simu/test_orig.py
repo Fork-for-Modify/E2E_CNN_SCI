@@ -26,7 +26,7 @@ def main():
     ### pre-trainded model
     # pre_model_name [modify]
     # pre_model_name = 'Decoder-T0427184230-D0.10L0.010-RMSE/models-0.0744-256404'
-    pre_model_name = 'Decoder-T0516005658-D0.10L0.010-RMSE/models-0.2311-57937'
+    pre_model_name = 'Decoder-T0516120354-D0.10L0.001-RMSE/models-0.1957-114862'
     
     pre_model_dir = 'Result\\Model-Config'
     model_filename = os.path.join(os.path.abspath('.'), pre_model_dir, pre_model_name)
