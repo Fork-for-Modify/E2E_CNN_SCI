@@ -27,7 +27,7 @@ This repository contains the  codes modified from https://github.com/mq0829/DL-C
 ## Training
 
 1. put the ground truth (orig) datasets for training and validation in 'data_simu/training_truth' and 'data_simu/valid_truth', respectively.
-2. modify configurations in 'E2E_CNN_simu/Model/Config.yaml'
+2. modify configurations, like batch_size, learning rate, etc. in 'E2E_CNN_simu/Model/Config.yaml' . Particularly, If you have a pre-trained model for finetuning, specify it's path(like, 'Result/Model-Config/Decoder-T0519121103-D0.10L0.001-RMSE/models-0.2041-117480') in the 'model_filename' item of the 'Config.yaml' file)
 3. run 'E2E_CNN_simu/train.py' to train the network
 4. the result will be saved in 'E2E_CNN_simu/Result/Model-Config/'
 
