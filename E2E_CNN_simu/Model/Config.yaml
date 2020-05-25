@@ -7,28 +7,29 @@ category_mask: data_simu
 data_name: scene
 # mask_name: mask_256
 # mask_name: combine_mask_512_10f
-mask_name: combine_mask_256_10f
+mask_name: gray_mask_256_10f
 model_name: Decoder
 result_dir: Result
 result_model: Model-Config
 result_data: Validation-Result
-model_filename: 
-GPU: 0,1
+model_filename: Result\Model-Config\gray_mask_256_10f/models-0.1256-1424000
+GPU: '0'
 
 # === Configure Model Handler === #
 # Data Assignment
 compressive_ratio: 10
-batch_size: 4
-segset_size: 8
-height_seg: 73
-height_occupy: 12
+batch_size: 3
+# segset_size: 8
+# height_seg: 73
+# height_occupy: 12
+
 # Model training Controler
 epochs: 500
 patience: 400
-learning_rate: 0.001
+learning_rate: 0.00025
 lr_decay: 0.8
-lr_decay_epoch: 30
-lr_decay_interval: 30
+lr_decay_epoch: 8
+lr_decay_interval: 8
 loss_func: RMSE
 upbound: 1
 # max_grad_norm: 5.0

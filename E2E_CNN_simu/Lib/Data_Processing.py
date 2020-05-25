@@ -85,16 +85,25 @@ def Data_Generator_File(dataset_name, label, mask, batch_size, nF, is_training=T
             else:
                 img = sio.loadmat(data_name[2]+label[ind_set])[key_name]
 
+
             if is_testing_meas is False:
                 img=img/255
-                meas = np.sum(mask*img,2) # input orig as test pic
-            else:
+                meas = np.sum(mask*img,2) # input orig as train/valid/test pic
+            elif (is_testing is True) and (is_testing_meas is True):
                 meas = img # input meas as test pic
                 if meas.max() > 50:
                     # meas is generated from orig with grayscale ranging 0-255, rescale it
                     meas = meas/255
 
-  
+            ### shot noise injection, for training for real data test
+            # if (is_training is True) and (add_noise is True):
+            #     QE, bit = 0.4, 512
+            #     meas_max = meas.max()
+            #     meas = meas/meas_max
+            #     meas = np.random.binomial((meas*bit/QE).astype(int),QE)
+            #     meas = meas/bit
+            #     meas = meas*meas_max
+              
             ### y/sum(phi) 
             C = np.sum(mask**2,2)
             C[C==0]=1
