@@ -2,6 +2,7 @@ import tensorflow as tf
 import numpy as np
 import yaml
 import os
+import shutil
 import h5py
 import time
 import sys
@@ -22,6 +23,7 @@ class Decoder_Handler(Basement_Handler):
         super(Decoder_Handler, self).__init__(sess=sess, model_config=model_config, is_training=is_training)
         self.initial_parameter()
         self.data_assignment(dataset_name, not is_training) # is_testing
+        self.dataset_name = dataset_name # zzh
 
         # Data Generator
         self.gen_train = Data_Generator_File(dataset_name,self.train_index,self.sense_mask,self.batch_size,self.nF,
@@ -109,12 +111,17 @@ class Decoder_Handler(Basement_Handler):
                 
     def train(self):
         self.sess.run(tf.global_variables_initializer())
-        print ('Training Started')
+        
+        # copy mask to model dir
+        print('\nLoaded mask: %s\n'%(self.dataset_name[1]))
+        shutil.copy(self.dataset_name[1]+'.mat', self.log_dir)
+        
+        print ('\n********* Training Started *********\n')
         if self.model_config.get('model_filename',None) is not None:
             self.restore()
-            print ('Pretrained Model Downloaded')
+            print ('\n------- Pretrained Model Downloaded -------\n')
         else:
-            print ('New Model Training')
+            print ('\n------- New Model Training -------\n')
         epoch_cnt,wait,min_val_loss,max_val_psnr = 0,0,float('inf'),0
         Tloss_list,Vloss_list=[],[]
         

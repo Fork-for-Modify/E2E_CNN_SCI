@@ -1,9 +1,9 @@
 ---
 # === Configure Main function === #
-category: data_simu/training_truth/
-category_valid: data_simu/valid_truth/
-category_test: data_simu/testing_truth/               
-category_mask: data_simu
+category: data_simu/training_truth/data_augment_256_10f/
+category_valid: data_simu/valid_truth/valid_256_10f/
+category_test: data_simu/testing_truth/test_256_10f/     
+category_mask: data_simu/mask
 data_name: scene
 # mask_name: mask_256
 # mask_name: combine_mask_512_10f
@@ -12,7 +12,7 @@ model_name: Decoder
 result_dir: Result
 result_model: Model-Config
 result_data: Validation-Result
-model_filename: Result\Model-Config\gray_mask_256_10f/models-0.1256-1424000
+model_filename:
 GPU: '0'
 
 # === Configure Model Handler === #
@@ -26,10 +26,10 @@ batch_size: 3
 # Model training Controler
 epochs: 500
 patience: 400
-learning_rate: 0.00025
+learning_rate: 0.01
 lr_decay: 0.8
-lr_decay_epoch: 8
-lr_decay_interval: 8
+lr_decay_epoch: 5
+lr_decay_interval: 5
 loss_func: RMSE
 upbound: 1
 # max_grad_norm: 5.0
