@@ -25,7 +25,7 @@ def main():
     dataset_name = (data_name,mask_name)
     
     tf_config = tf.ConfigProto()
-    os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2" # ignore waring
+    # os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2" # ignore waring
     # os.environ["CUDA_VISIBLE_DEVICES"] = "0"
     os.environ["CUDA_VISIBLE_DEVICES"] = model_config['GPU']
     
